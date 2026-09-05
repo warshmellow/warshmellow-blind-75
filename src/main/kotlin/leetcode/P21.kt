@@ -1,9 +1,5 @@
 package leetcode
 
-data class ListNode(val `val`: Int) {
-    var next: ListNode? = null
-}
-
 /**
  * Challenge: Merge Two Sorted Lists (easy)
  * Link: https://leetcode.com/problems/merge-two-sorted-lists

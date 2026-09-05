@@ -1,9 +1,5 @@
 package leetcode
 
-data class ListNode(val `val`: Int) {
-    var next: ListNode? = null
-}
-
 /**
  * Challenge: Reverse Linked List (easy)
  * Link: https://leetcode.com/problems/reverse-linked-list

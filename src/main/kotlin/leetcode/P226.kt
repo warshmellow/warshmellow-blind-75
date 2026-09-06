@@ -20,8 +20,15 @@ object P226 {
      * }
      */
     class Solution {
-        fun invertTree(root: TreeNode?): TreeNode? {
-            return null
+        fun invertTree(root: TreeNode?): TreeNode? = when {
+            root?.left == null && root?.right == null -> root
+            else -> {
+                val invertedRight = invertTree(root.right)
+                val invertedLeft = invertTree(root.left)
+                root.left = invertedRight
+                root.right = invertedLeft
+                root
+            }
         }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

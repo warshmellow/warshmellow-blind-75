@@ -35,20 +35,30 @@ object P15 {
                     val ni = nums[i]
                     val nj = nums[j]
                     val nk = -ni - nj
+                    val candidate = getSortedTriple(ni, nj, nk)
 
-                    val min = minOf(ni, nj, nk)
-                    val max = maxOf(ni, nj, nk)
-                    val mid = -min - max
-
-                    val candidate = Triple(min, mid, max)
-
-                    if (!resultSet.contains(candidate) && valuesToIndices[nk]?.find { it > j } != null) {
-                        resultSet.add(candidate)
+                    if (!resultSet.contains(candidate)) {
+                        val indices = valuesToIndices[nk]
+                        if (indices != null) {
+                            val searchResult = indices.binarySearch(j + 1)
+                            val insertPos = if (searchResult >= 0) searchResult else -searchResult - 1
+                            if (insertPos < indices.size) {
+                                resultSet.add(candidate)
+                            }
+                        }
                     }
+
                 }
             }
 
-            return resultSet.toList().map { it.toList() }
+            return resultSet.map { listOf(it.first, it.second, it.third) }
+        }
+
+        fun getSortedTriple(ni: Int, nj: Int, nk: Int): Triple<Int, Int, Int> {
+            val min = minOf(ni, nj, nk)
+            val max = maxOf(ni, nj, nk)
+            val mid = -min - max
+            return Triple(min, mid, max)
         }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

@@ -18,10 +18,11 @@ object P15 {
              */
             nums.sort()
             val n = nums.size
-
-            val resultSet = mutableSetOf<Triple<Int, Int, Int>>()
+            val result = mutableListOf<List<Int>>()
 
             for (i in 0 until n - 1) {
+                if (i > 0 && nums[i] == nums[i - 1]) continue
+
                 var left = i + 1
                 var right = n - 1
 
@@ -32,21 +33,24 @@ object P15 {
                     val nk = nums[right]
 
                     val total = ni + nj + nk
-                    
+
                     when {
                         total == 0 -> {
-                            resultSet.add(Triple(ni, nj, nk))
+                            result.add(listOf(ni, nj, nk))
                             left++
                             right--
+                            while (left < right && nums[left] == nums[left - 1]) left++
+                            while (left < right && nums[right] == nums[right + 1]) right--
                         }
 
                         total < 0 -> left++
+
                         else -> right--
                     }
                 }
             }
 
-            return resultSet.map { listOf(it.first, it.second, it.third) }
+            return result
         }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

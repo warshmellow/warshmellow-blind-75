@@ -13,51 +13,43 @@ object P15 {
         fun threeSum(nums: IntArray): List<List<Int>> {
             /*
             main idea: if you're given nums[i] and nums[j], nums[k] = - nums[i] - nums[j]
-            So have map value -> indices with it
-            then you have unique (nums[i], nums[j], nums[k])
-            you need indices with it b/c make sure i != j != k
-
-            Furthermore, you can sort the entire nums. While i,j,k will be out of order, their
-            values will be sorted and each triple will be unique
-
+            sort nums so you can use binary search
+            fix i, then find j < k meeting criteria using binary search
              */
             nums.sort()
-
-            val valuesToIndices = hashMapOf<Int, MutableList<Int>>()
-            for ((index, value) in nums.withIndex()) {
-                valuesToIndices.getOrPut(value) { mutableListOf() }.add(index)
-            }
+            val n = nums.size
 
             val resultSet = mutableSetOf<Triple<Int, Int, Int>>()
 
-            for (i in nums.indices) {
-                for (j in i + 1 until nums.size) {
-                    val ni = nums[i]
-                    val nj = nums[j]
-                    val nk = -ni - nj
+            for (i in 0 until n - 1) {
+                var left = i + 1
+                var right = n - 1
 
-                    val indices = valuesToIndices[nk] ?: continue
+                val ni = nums[i]
 
-                    val candidate = getSortedTriple(ni, nj, nk)
+                while (left < right) {
+                    val nj = nums[left]
+                    val nk = nums[right]
 
-                    if (!resultSet.contains(candidate)) {
-                        val searchResult = indices.binarySearch(j + 1)
-                        val insertPos = if (searchResult >= 0) searchResult else -searchResult - 1
-                        if (insertPos < indices.size) {
-                            resultSet.add(candidate)
-                        }
+                    val total = ni + nj + nk
+
+                    if (total == 0) {
+                        resultSet.add(Triple(ni, nj, nk))
+                        left++
+                        right--
+                    } else if (total < 0) {
+                        // ni + nj + nk < 0
+                        // so nj needs to increase
+                        left++
+                    } else {
+                        // ni + nj + nk > 0
+                        // so nk needs to decrease
+                        right--
                     }
                 }
             }
 
             return resultSet.map { listOf(it.first, it.second, it.third) }
-        }
-
-        fun getSortedTriple(ni: Int, nj: Int, nk: Int): Triple<Int, Int, Int> {
-            val min = minOf(ni, nj, nk)
-            val max = maxOf(ni, nj, nk)
-            val mid = -min - max
-            return Triple(min, mid, max)
         }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

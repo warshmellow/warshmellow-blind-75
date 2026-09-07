@@ -35,19 +35,18 @@ object P15 {
                     val ni = nums[i]
                     val nj = nums[j]
                     val nk = -ni - nj
+
+                    val indices = valuesToIndices[nk] ?: continue
+
                     val candidate = getSortedTriple(ni, nj, nk)
 
                     if (!resultSet.contains(candidate)) {
-                        val indices = valuesToIndices[nk]
-                        if (indices != null) {
-                            val searchResult = indices.binarySearch(j + 1)
-                            val insertPos = if (searchResult >= 0) searchResult else -searchResult - 1
-                            if (insertPos < indices.size) {
-                                resultSet.add(candidate)
-                            }
+                        val searchResult = indices.binarySearch(j + 1)
+                        val insertPos = if (searchResult >= 0) searchResult else -searchResult - 1
+                        if (insertPos < indices.size) {
+                            resultSet.add(candidate)
                         }
                     }
-
                 }
             }
 

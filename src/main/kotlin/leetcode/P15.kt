@@ -32,19 +32,16 @@ object P15 {
                     val nk = nums[right]
 
                     val total = ni + nj + nk
+                    
+                    when {
+                        total == 0 -> {
+                            resultSet.add(Triple(ni, nj, nk))
+                            left++
+                            right--
+                        }
 
-                    if (total == 0) {
-                        resultSet.add(Triple(ni, nj, nk))
-                        left++
-                        right--
-                    } else if (total < 0) {
-                        // ni + nj + nk < 0
-                        // so nj needs to increase
-                        left++
-                    } else {
-                        // ni + nj + nk > 0
-                        // so nk needs to decrease
-                        right--
+                        total < 0 -> left++
+                        else -> right--
                     }
                 }
             }

@@ -11,18 +11,27 @@ object P125 {
     //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
     class Solution {
         fun isPalindrome(s: String): Boolean {
-            val newS = s.lowercase().filter { c -> c.isLetterOrDigit() }
+            val n = s.length
 
-            val n = newS.length
-            val halfway = n / 2
+            var left = 0
+            var right = n - 1
 
-            return if (n == 1) {
-                true
-            } else if (n % 2 == 0) {
-                newS.substring(0, halfway) == newS.substring(halfway).reversed()
-            } else {
-                newS.substring(0, halfway) == newS.substring(halfway + 1).reversed()
+            while (left < right) {
+                val lc = s[left]
+                val rc = s[right]
+
+                if (!lc.isLetterOrDigit()) {
+                    left++
+                } else if (!rc.isLetterOrDigit()) {
+                    right--
+                } else if (lc.equals(rc, ignoreCase = true)) {
+                    left++
+                    right--
+                } else {
+                    return false
+                }
             }
+            return true
         }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

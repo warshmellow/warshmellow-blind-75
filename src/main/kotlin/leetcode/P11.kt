@@ -17,7 +17,7 @@ object P11 {
 
             while (left <= right) {
                 val width = right - left
-                val area = (right - left) * minOf(height[left], height[right])
+                val area = width * minOf(height[left], height[right])
 
                 maxWater = maxOf(maxWater, area)
 

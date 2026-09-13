@@ -11,20 +11,23 @@ object P424 {
     //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
     class Solution {
         fun characterReplacement(s: String, k: Int): Int {
-            val h = HashMap<Char, Int>()
+            val asciiSize = 128
+            val h = IntArray(asciiSize)
             var i = 0
             var j = 0
             var mx = 0
             var maxFreq = 0
 
             while (j < s.length) {
-                h[s[j]] = (h[s[j]] ?: 0) + 1
-                maxFreq = maxOf(maxFreq, h[s[j]] ?: 0)
+                val charCode = s[j].code
+
+                h[charCode]++
+                maxFreq = maxOf(maxFreq, h[charCode])
 
                 var windowLength = j + 1 - i
 
                 if (windowLength - maxFreq > k) {
-                    h[s[i]] = (h[s[i]] ?: 0) - 1
+                    h[s[i].code]--
                     i++
                     windowLength = j + 1 - i
                 }

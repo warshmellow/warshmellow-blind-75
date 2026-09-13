@@ -11,7 +11,23 @@ object P11 {
     //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
     class Solution {
         fun maxArea(height: IntArray): Int {
-            return 1
+            var maxWater = 0
+            var left = 0
+            var right = height.size - 1
+
+            while (left <= right) {
+                val width = right - left
+                val area = (right - left) * minOf(height[left], height[right])
+
+                maxWater = maxOf(maxWater, area)
+
+                if (height[left] < height[right]) {
+                    left++
+                } else {
+                    right--
+                }
+            }
+            return maxWater
         }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

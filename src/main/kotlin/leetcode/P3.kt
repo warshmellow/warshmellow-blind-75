@@ -17,7 +17,7 @@ object P3 {
             var j = 0
 
             while (j < s.length) {
-                if (!inWindow.contains(s[j])) {
+                if (s[j] !in inWindow) {
                     // If the character is unique, add it to the window
                     inWindow.add(s[j])
                     // Update the maximum length found so far

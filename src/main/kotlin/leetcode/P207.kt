@@ -8,12 +8,12 @@ object P207 {
 
 //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
 
-//IMPORTANT!! Submit Code Region Begin(Do not remove this line)
-class Solution {
-    fun canFinish(numCourses: Int, prerequisites: Array<IntArray>): Boolean {
-        
+    //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
+    class Solution {
+        fun canFinish(numCourses: Int, prerequisites: Array<IntArray>): Boolean {
+            return false
+        }
     }
-}
 //IMPORTANT!! Submit Code Region End(Do not remove this line)
 //IMPORTANT!! Submit Code Region End(Do not remove this line)
 

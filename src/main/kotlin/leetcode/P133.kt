@@ -1,5 +1,7 @@
 package leetcode
 
+import org.example.leetcode.Node
+
 /**
  * Challenge: Clone Graph (medium)
  * Link: https://leetcode.com/problems/clone-graph

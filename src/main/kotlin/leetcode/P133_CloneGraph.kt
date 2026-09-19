@@ -1,12 +1,10 @@
 package leetcode
 
-import org.example.leetcode.Node
-
 /**
  * Challenge: Clone Graph (medium)
  * Link: https://leetcode.com/problems/clone-graph
  */
-object P133 {
+object P133_CloneGraph {
 
 //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
 
@@ -20,7 +18,7 @@ object P133 {
 
     class Solution {
         fun cloneGraph(node: Node?): Node? {
-            return node
+            return null
         }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

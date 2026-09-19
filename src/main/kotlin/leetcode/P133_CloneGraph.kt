@@ -18,7 +18,20 @@ object P133_CloneGraph {
 
     class Solution {
         fun cloneGraph(node: Node?): Node? {
-            return null
+            val visited = HashSet<Node>()
+
+            return when {
+                node == null -> null
+                else -> {
+                    for (neighbor in node.neighbors.filterNotNull()) {
+                        if (neighbor !in visited) {
+                            visited.add(neighbor)
+                            cloneGraph(neighbor)
+                        }
+                    }
+                    null
+                }
+            }
         }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

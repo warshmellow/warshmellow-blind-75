@@ -4,14 +4,14 @@ package leetcode
  * Challenge: Number of Islands (medium)
  * Link: https://leetcode.com/problems/number-of-islands
  */
-object P200 {
+object P200_NumberOfIslands {
 
 //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
 
     //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
     class Solution {
         fun numIslands(grid: Array<CharArray>): Int {
-            return 1
+            return 0
         }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

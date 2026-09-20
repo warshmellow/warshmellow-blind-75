@@ -18,20 +18,24 @@ object P133_CloneGraph {
 
     class Solution {
         fun cloneGraph(node: Node?): Node? {
-            val visited = HashSet<Node>()
+            val mp = mutableMapOf<Node, Node>()
+            return cloneGraph(node, mp)
+        }
 
-            return when {
-                node == null -> null
-                else -> {
-                    for (neighbor in node.neighbors.filterNotNull()) {
-                        if (neighbor !in visited) {
-                            visited.add(neighbor)
-                            cloneGraph(neighbor)
-                        }
-                    }
-                    null
-                }
+        fun cloneGraph(node: Node?, mp: MutableMap<Node, Node>): Node? {
+            if (node == null) return null
+
+            if (node in mp) return mp[node]
+
+            val clonedNode = Node(node.`val`)
+            mp[node] = clonedNode
+
+            for (neighbor in node.neighbors.filterNotNull()) {
+                val clonedNeighbor = cloneGraph(neighbor, mp)
+                clonedNode.neighbors.add(clonedNeighbor)
             }
+
+            return clonedNode
         }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

@@ -4,14 +4,14 @@ package leetcode
  * Challenge: Course Schedule (medium)
  * Link: https://leetcode.com/problems/course-schedule
  */
-object P207 {
+object P207_CourseSchedule {
 
 //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
 
     //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
     class Solution {
         fun canFinish(numCourses: Int, prerequisites: Array<IntArray>): Boolean {
-            return false
+            return true
         }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

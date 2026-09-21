@@ -31,16 +31,22 @@ object P207_CourseSchedule {
         fun dfs(course: Int, graph: List<MutableList<Int>>, path: MutableSet<Int>): Boolean {
             // 1. Base case: Check if course is already in the current recursion path
             // (Your code here)
+            if (course in path) return false
 
             // 2. Add course to current path
             // (Your code here)
+            path.add(course)
 
             // 3. Recursively visit all neighbors of this course
             // If any neighbor returns false, return false immediately
             // (Your code here)
+            for (neighbor in graph[course]) {
+                if (!dfs(neighbor, graph, path)) return false
+            }
 
             // 4. Backtrack: remove course from path
             // (Your code here)
+            path.remove(course)
 
             // 5. The Optimization: Clear neighbors so future DFS calls treat it as a dead end
             graph[course].clear()

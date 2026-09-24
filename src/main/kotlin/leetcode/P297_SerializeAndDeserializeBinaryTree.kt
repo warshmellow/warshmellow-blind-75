@@ -62,6 +62,8 @@ object P297_SerializeAndDeserializeBinaryTree {
         }
     }
 
+    class Solution
+
     /**
      * Your Codec object will be instantiated and called as such:
      * var ser = Codec()

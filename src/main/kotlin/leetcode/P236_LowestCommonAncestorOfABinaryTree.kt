@@ -20,16 +20,15 @@ object P236_LowestCommonAncestorOfABinaryTree {
     class Solution {
         fun lowestCommonAncestor(root: TreeNode?, p: TreeNode?, q: TreeNode?): TreeNode? {
             // Safe check: if any are null, return root immediately
-            if (root == null || p == null || q == null) return root
+            if (root == null || p == root || q == root) return root
 
-            val rootVal = root.`val`
-            val pVal = p.`val` // No safe navigation (?.) needed due to smart casting above
-            val qVal = q.`val`
+            val left = lowestCommonAncestor(root.left, p, q)
+            val right = lowestCommonAncestor(root.right, p, q)
 
             return when {
-                pVal > rootVal && qVal > rootVal -> lowestCommonAncestor(root.right, p, q)
-                pVal < rootVal && qVal < rootVal -> lowestCommonAncestor(root.left, p, q)
-                else -> root
+                left != null && right != null -> root
+                left != null -> left
+                else -> right
             }
         }
     }

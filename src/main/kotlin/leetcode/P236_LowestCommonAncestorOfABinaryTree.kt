@@ -4,7 +4,7 @@ package leetcode
  * Challenge: Lowest Common Ancestor of a Binary Tree (medium)
  * Link: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree
  */
-object P236 {
+object P236_LowestCommonAncestorOfABinaryTree {
 
 //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
 
@@ -19,9 +19,21 @@ object P236 {
 
     class Solution {
         fun lowestCommonAncestor(root: TreeNode?, p: TreeNode?, q: TreeNode?): TreeNode? {
-            return root
+            // Safe check: if any are null, return root immediately
+            if (root == null || p == null || q == null) return root
+
+            val rootVal = root.`val`
+            val pVal = p.`val` // No safe navigation (?.) needed due to smart casting above
+            val qVal = q.`val`
+
+            return when {
+                pVal > rootVal && qVal > rootVal -> lowestCommonAncestor(root.right, p, q)
+                pVal < rootVal && qVal < rootVal -> lowestCommonAncestor(root.left, p, q)
+                else -> root
+            }
         }
     }
+
 //IMPORTANT!! Submit Code Region End(Do not remove this line)
 //IMPORTANT!! Submit Code Region End(Do not remove this line)
 

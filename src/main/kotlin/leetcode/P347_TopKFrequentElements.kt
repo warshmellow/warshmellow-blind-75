@@ -10,14 +10,32 @@ object P347_TopKFrequentElements {
 
     //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
     class Solution {
-        fun topKFrequent(nums: IntArray, k: Int): IntArray =
-            nums.groupBy { it }
+        fun topKFrequent(nums: IntArray, k: Int): IntArray {
+            val counts = nums.groupBy { it }
                 .mapValues { it.value.size }
-                .toList()
-                .sortedByDescending { it.second }
-                .take(k)
-                .map { it.first }
-                .toIntArray()
+
+            val n = nums.size
+            val freq = ArrayList<ArrayList<Int>>()
+            for (i in 0 until n + 1) {
+                freq.add(ArrayList())
+            }
+
+            for ((num, count) in counts) {
+                freq[count].add(num)
+            }
+
+            val result = ArrayList<Int>()
+            for (i in n downTo 1) {
+                for (num in freq[i]) {
+                    if (result.size < k) {
+                        result.add(num)
+                    } else {
+                        break
+                    }
+                }
+            }
+            return result.toIntArray()
+        }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

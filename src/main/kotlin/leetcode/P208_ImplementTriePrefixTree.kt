@@ -10,20 +10,39 @@ object P208_ImplementTriePrefixTree {
 
     //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
     class Trie() {
+        private val root = TrieNode()
 
         fun insert(word: String) {
-            return
+            var curr = root
+            for (c in word) {
+                curr = curr.children.getOrPut(c) { TrieNode() }
+            }
+            curr.isEnd = true
         }
 
         fun search(word: String): Boolean {
-            return true
+            val node = findNode(word)
+            return node != null && node.isEnd
         }
 
         fun startsWith(prefix: String): Boolean {
-            return true
+            return findNode(prefix) != null
+        }
+
+        private fun findNode(str: String): TrieNode? {
+            var curr = root
+            for (c in str) {
+                curr = curr.children[c] ?: return null
+            }
+            return curr
         }
 
     }
+
+    data class TrieNode(
+        val children: HashMap<Char, TrieNode> = HashMap(),
+        var isEnd: Boolean = false
+    )
 
     class Solution
 

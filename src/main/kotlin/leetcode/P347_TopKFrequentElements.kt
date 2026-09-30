@@ -10,9 +10,14 @@ object P347_TopKFrequentElements {
 
     //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
     class Solution {
-        fun topKFrequent(nums: IntArray, k: Int): IntArray {
-            return nums
-        }
+        fun topKFrequent(nums: IntArray, k: Int): IntArray =
+            nums.groupBy { it }
+                .mapValues { it.value.size }
+                .toList()
+                .sortedByDescending { it.second }
+                .take(k)
+                .map { it.first }
+                .toIntArray()
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

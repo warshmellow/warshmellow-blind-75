@@ -20,7 +20,40 @@ object P23_MergeKSortedLists {
      */
     class Solution {
         fun mergeKLists(lists: Array<ListNode?>): ListNode? {
-            return lists[0]
+            if (lists.isEmpty()) return null
+
+            var result = lists[0]
+            for (i in 1 until lists.size) {
+                result = mergeTwoLists(result, lists[i])
+            }
+
+            return result
+        }
+
+        fun mergeTwoLists(l1: ListNode?, l2: ListNode?): ListNode? {
+            if (l1 == null) return l2
+            if (l2 == null) return l1
+
+            val dummy = ListNode(0)
+            var curr = dummy
+            var curr1 = l1
+            var curr2 = l2
+
+            while (curr1 != null && curr2 != null) {
+                if (curr1.`val` <= curr2.`val`) {
+                    curr.next = curr1
+                    curr1 = curr1.next
+                } else {
+                    curr.next = curr2
+                    curr2 = curr2.next
+                }
+                curr = curr.next!!
+            }
+
+            curr.next = curr1 ?: curr2
+
+            val head = dummy.next
+            return head
         }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

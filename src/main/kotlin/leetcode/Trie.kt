@@ -1,6 +1,6 @@
 package leetcode
 
-class Trie() {
+class Trie {
     private val root = TrieNode()
 
     fun insert(word: String) {
@@ -9,6 +9,7 @@ class Trie() {
             curr = curr.children.getOrPut(c) { TrieNode() }
         }
         curr.isEnd = true
+        curr.word = word
     }
 
     fun search(word: String): Boolean {

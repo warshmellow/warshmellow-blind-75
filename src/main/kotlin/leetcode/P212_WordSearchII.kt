@@ -21,8 +21,9 @@ object P212_WordSearchII {
 
             for (i in board.indices) {
                 for (j in board[0].indices) {
-                    for ((c, child) in trie.root.children) {
-                        dfs(board, child, c, i, j, result)
+                    val nextNode = trie.root.children[board[i][j]]
+                    if (nextNode != null) {
+                        dfs2(board, nextNode, i, j, result)
                     }
                 }
             }
@@ -30,12 +31,7 @@ object P212_WordSearchII {
             return result
         }
 
-        fun dfs(board: Array<CharArray>, currNode: TrieNode, c: Char, i: Int, j: Int, result: MutableList<String>) {
-            if (i < 0 || i >= board.size) return
-            if (j < 0 || j >= board[0].size) return
-
-            if (c != board[i][j]) return
-
+        fun dfs2(board: Array<CharArray>, currNode: TrieNode, i: Int, j: Int, result: MutableList<String>) {
             if (currNode.word != null) {
                 result.add(currNode.word!!)
                 currNode.word = null
@@ -45,13 +41,25 @@ object P212_WordSearchII {
 
             board[i][j] = '#'
 
-            for ((c, child) in currNode.children) {
-                dfs(board, child, c, i - 1, j, result)
-                dfs(board, child, c, i + 1, j, result)
-                dfs(board, child, c, i, j - 1, result)
-                dfs(board, child, c, i, j + 1, result)
-            }
+            val dirs = arrayOf(
+                Pair(-1, 0), // Up
+                Pair(1, 0),  // Down
+                Pair(0, -1), // Left
+                Pair(0, 1)   // Right
+            )
 
+            for ((di, dj) in dirs) {
+                val r = i + di
+                val c = j + dj
+
+                if (r in 0 until board.size && c in 0 until board[0].size) {
+
+                    val nextNode = currNode.children[board[r][c]]
+                    if (nextNode != null) {
+                        dfs2(board, nextNode, r, c, result)
+                    }
+                }
+            }
             board[i][j] = originalChar
         }
     }

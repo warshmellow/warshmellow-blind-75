@@ -22,7 +22,7 @@ object P15_3Sum {
             val n = nums.size
             nums.sort()
 
-            val result = HashSet<ArrayList<Int>>()
+            val result = HashSet<List<Int>>()
 
             for (i in 0 until n - 1) {
                 var j = i + 1
@@ -37,7 +37,7 @@ object P15_3Sum {
                     val total = ni + nj + nk
 
                     if (total == 0) {
-                        val found = arrayListOf<Int>(ni, nj, nk)
+                        val found = listOf(ni, nj, nk)
                         result.add(found)
                         j++
                         k--

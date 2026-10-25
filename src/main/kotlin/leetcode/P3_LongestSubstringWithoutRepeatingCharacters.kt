@@ -24,16 +24,11 @@ object P3_LongestSubstringWithoutRepeatingCharacters {
                     mx = max(mx, j + 1 - i)
                     j++
                 } else {
-                    while (inWindow.size < j + 1 - i) {
-                        if (s[i] != s[j]) {
-                            inWindow.remove(s[i])
-                        }
-                        i++
-                    }
-                    j++
+                    inWindow.remove(s[i])
+                    i++
                 }
             }
-            
+
             return mx
         }
     }

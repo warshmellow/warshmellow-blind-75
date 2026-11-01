@@ -4,7 +4,7 @@ package leetcode
  * Challenge: Container With Most Water (medium)
  * Link: https://leetcode.com/problems/container-with-most-water
  */
-object P11 {
+object P11_ContainerWithMostWater {
 
 //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
 
@@ -17,7 +17,7 @@ object P11 {
 
             while (left <= right) {
                 val width = right - left
-                val area = width * minOf(height[left], height[right])
+                val area = minOf(height[left], height[right]) * width
 
                 maxWater = maxOf(maxWater, area)
 
@@ -27,6 +27,7 @@ object P11 {
                     right--
                 }
             }
+
             return maxWater
         }
     }

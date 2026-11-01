@@ -4,62 +4,69 @@ package leetcode
  * Challenge: Minimum Window Substring (hard)
  * Link: https://leetcode.com/problems/minimum-window-substring
  */
-object P76 {
+object P76_MinimumWindowSubstring {
 
 //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
 
     //IMPORTANT!! Submit Code Region Begin(Do not remove this line)
     class Solution {
         fun minWindow(s: String, t: String): String {
-            if (s.length < t.length) return ""
+            val m = s.length
+            val n = t.length
+
+            if (m < n) return ""
 
             val asciiSize = 128
             val countT = IntArray(asciiSize)
             val window = IntArray(asciiSize)
 
             var uniqueCharsInT = 0
-            for (i in 0 until t.length) {
+            for (i in t.indices) {
                 val charCode = t[i].code
-                if (countT[charCode] == 0) uniqueCharsInT++
+                if (countT[charCode] == 0) {
+                    uniqueCharsInT++
+                }
                 countT[charCode]++
             }
 
-            var have = 0
-            val need = uniqueCharsInT
+            var currentUniqueCharsSatisfied = 0
+            val requiredUniqueCharsSatisfied = uniqueCharsInT
 
             var minLen = Int.MAX_VALUE
-            var resRange = -1..-1
+            var resultRange = -1..-1
 
             var left = 0
             for (right in 0 until s.length) {
                 val rChar = s[right].code
                 window[rChar]++
 
-                val existsInCountT = countT[rChar] > 0
-                val windowHasSameCountChar = window[rChar] == countT[rChar]
-                if (existsInCountT && windowHasSameCountChar) have++
+                val rCharInCountT = countT[rChar] > 0
+                val windowHasSameCountRChar = window[rChar] == countT[rChar]
+                if (rCharInCountT && windowHasSameCountRChar) currentUniqueCharsSatisfied++
 
-                while (have == need) {
+                while (currentUniqueCharsSatisfied == requiredUniqueCharsSatisfied) {
                     val currentWindowLen = right + 1 - left
+
                     if (currentWindowLen < minLen) {
-                        minLen = currentWindowLen
-                        resRange = left..right
+                        minLen = minOf(minLen, currentWindowLen)
+                        resultRange = left..right
                     }
 
                     val lChar = s[left].code
                     window[lChar]--
 
-                    if (countT[lChar] > 0 && window[lChar] < countT[lChar]) {
-                        have--
+                    val lCharInT = countT[lChar] > 0
+                    if (lCharInT && window[lChar] < countT[lChar]) {
+                        currentUniqueCharsSatisfied--
                     }
                     left++
                 }
             }
 
-            return if (minLen == Int.MAX_VALUE) {
-                ""
+            if (minLen == Int.MAX_VALUE) {
+                return ""
             } else {
-                s.substring(resRange)
+                return s.substring(resultRange)
             }
         }
     }

@@ -23,24 +23,18 @@ object P322_CoinChange {
         fun dfs(h: HashMap<Int, Int>, coins: IntArray, amount: Int): Int {
             if (amount == 0) return 0
             else if (amount < 0) return -1
+            
+            return h.getOrPut(amount, {
+                var result = Int.MAX_VALUE
 
-            if (amount in h) {
-                return h[amount]!!
-            }
-
-            var result = Int.MAX_VALUE
-
-            for (coin in coins) {
-                val res = dfs(h, coins, amount - coin)
-                if (res != -1 && res != Int.MAX_VALUE) {
-                    result = min(result, 1 + res)
+                for (coin in coins) {
+                    val res = dfs(h, coins, amount - coin)
+                    if (res != -1 && res != Int.MAX_VALUE) {
+                        result = min(result, 1 + res)
+                    }
                 }
-            }
-
-            h[amount] = result
-
-            return result
-
+                result
+            })
         }
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

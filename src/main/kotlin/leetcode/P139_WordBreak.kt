@@ -24,14 +24,12 @@ object P139_WordBreak {
             for (j in i..<n) {
                 val curr = s.substring(i..j)
 
-                if (curr in wordDict) {
-                    val res = h.getOrPut(
+                if (curr in wordDict && h.getOrPut(
                         j + 1,
                         { dfs(s, j + 1, wordDict, h) }
                     )
-                    if (res) {
-                        return true
-                    }
+                ) {
+                    return true
                 }
             }
 
